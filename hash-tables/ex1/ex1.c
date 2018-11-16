@@ -3,10 +3,10 @@
 #include "hashtable.h"
 #include "ex1.h"
 
-typedef struct Answer {
+struct Answer {
   int index_1;
   int index_2;
-} Answer;
+};
 
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
@@ -19,7 +19,9 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
   for (int i=0; i < ht->capacity; i++){
     for (int j=i+1; j < ht->capacity; j++){
       if(ht->storage[i]->value + ht->storage[j]->value == limit){
-        answ_finalle = {.index_1 = ht->storage[i]->key, .index_2 = ht->storage[j]->key};
+        answ_finalle.index_1 = ht->storage[i]->key;
+        answ_finalle.index_2 = ht->storage[j]->key;
+        // answ_finalle = { ht->storage[i]->key, ht->storage[j]->key};
       }
     }
   }
