@@ -12,14 +12,20 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
   HashTable *ht = create_hash_table(length);
   Answer answ_finalle;
   for(int i=0; i< ht->capacity; i++){
+    // printf("value >>>> %d\n", weights[i]);
     hash_table_insert(ht, i, weights[i]);
   }
   for (int i=0; i < ht->capacity; i++) {
     for (int j=i+1; j < ht->capacity; j++) {
-      printf("SUM >>> %d\n", ht->storage[i]->value + ht->storage[j]->value);
-      if(ht->storage[i]->value + ht->storage[j]->value == limit) {
-        answ_finalle.index_2 = ht->storage[i]->key;
-        answ_finalle.index_1 = ht->storage[j]->key;
+      int i_val = hash_table_retrieve(ht, i);
+      int j_val = hash_table_retrieve(ht, j);
+      printf("SUM >>> %d, LIMIT >>> %d\n", i_val + j_val, limit);
+      if(i_val + j_val == limit) {
+        printf("i_1 >> %d, j_2 >> %d", i_val, j_val);
+        // answ_finalle.index_2 = ht->storage[i]->key;
+        // answ_finalle.index_1 = ht->storage[j]->key;
+        answ_finalle.index_2 = i;
+        answ_finalle.index_1 = j;
       }
     }
   }
